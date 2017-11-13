@@ -6,7 +6,8 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { AccountComponent } from './account/account.component';
 import { NewAccountComponent } from './new-account/new-account.component';
-
+import { AccountsService } from './accounts.service';
+import { LoggingService } from './logging.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +19,7 @@ import { NewAccountComponent } from './new-account/new-account.component';
     FormsModule,
     HttpModule
   ],
-  providers: [],
+  providers: [AccountsService, LoggingService], //we make sure that the whole application receive the same instance of AccountsService. Due to we put it here, it's possible to inject this service into other services.
   bootstrap: [AppComponent]
 })
 export class AppModule { }

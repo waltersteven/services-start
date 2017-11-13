@@ -6,17 +6,17 @@ import { AccountsService } from '../accounts.service';
   selector: 'app-new-account',
   templateUrl: './new-account.component.html',
   styleUrls: ['./new-account.component.css'],
-  providers: [LoggingService] //Usually a singleton object (one instance), received from import
+  //providers: [LoggingService] //Usually a singleton object (one instance), received from import
 })
 export class NewAccountComponent {
   @Output() accountAdded = new EventEmitter<{ name: string, status: string }>();
 
   //A SERVICE its a good way to apply DRY (Don't repeat yourself).
-  constructor(private loggingService: LoggingService, private accountsService: AccountsService) { } //LoggingService: instance received from provider. AccountsService it's sharing the same instance as app.component.ts.
+  constructor(private loggingService: LoggingService, private accountsService: AccountsService) { } //LoggingService: instance received from provider. AccountsService it's sharing the same instance as app.module.ts.
 
   onCreateAccount(accountName: string, accountStatus: string) {
     this.accountsService.addAccount(accountName, accountStatus);
-    this.loggingService.logStatusChange(accountStatus);
+    //this.loggingService.logStatusChange(accountStatus);
   }
 }
 

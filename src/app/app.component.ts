@@ -5,15 +5,14 @@ import { AccountsService } from './accounts.service';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  providers: [AccountsService]
 })
 export class AppComponent implements OnInit{
   accounts : {name: string, status: string}[] = [];
 
-  constructor(private accountsService: AccountsService) {}
+  constructor(private accountsService: AccountsService) {} //AccountsService it's sharing the same instance as app.module.ts.
 
   ngOnInit(){
     this.accounts = this.accountsService.accounts;
   }
-  
+
 }
