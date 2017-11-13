@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { LoggingService } from './logging.service'; //service injected in service
 
-@Injectable() //We have to place metadata, in this case, Injectable where we want to put a Service (where we expect to receive sth).
+@Injectable() //We have to place metadata as @component, in this case, Injectable where we want to put a Service (where we expect to receive sth injected).
 export class AccountsService {
     accounts = [
         {
@@ -17,6 +17,8 @@ export class AccountsService {
             status: 'unknown'
         }
     ];
+
+    statusUpdated = new EventEmitter<string>(); //this is triggered here and listened in another component.
 
     constructor(private loggingService: LoggingService){}
 
