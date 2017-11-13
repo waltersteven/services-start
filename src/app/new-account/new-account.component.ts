@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 import { LoggingService } from '../logging.service';
+import { AccountsService } from '../accounts.service';
 
 @Component({
   selector: 'app-new-account',
@@ -8,17 +9,14 @@ import { LoggingService } from '../logging.service';
   providers: [LoggingService] //Usually a singleton object (one instance), received from import
 })
 export class NewAccountComponent {
-  @Output() accountAdded = new EventEmitter<{name: string, status: string}>();
+  @Output() accountAdded = new EventEmitter<{ name: string, status: string }>();
 
   //A SERVICE its a good way to apply DRY (Don't repeat yourself).
-  constructor(private loggingService: LoggingService){} //LoggingService: instance received from provider
+  constructor(private loggingService: LoggingService, private accountsService: AccountsService) { } //LoggingService: instance received from provider. AccountsService it's sharing the same instance as app.component.ts.
 
   onCreateAccount(accountName: string, accountStatus: string) {
-    this.accountAdded.emit({
-      name: accountName,
-      status: accountStatus
-    });
-    // console.log('A server status changed, new status: ' + accountStatus);
+    this.accountsService.addAccount(accountName, accountStatus);
     this.loggingService.logStatusChange(accountStatus);
   }
 }
+
